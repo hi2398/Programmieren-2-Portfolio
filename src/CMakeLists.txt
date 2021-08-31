@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cpp config.h)
+add_executable(${PROJECT_NAME} main.cpp config.h "Screens/Aufgabe1a.h" "Screens/Aufgabe1a.cpp" "Screens/StartScreen.h" "Screens/StartScreen.cpp" "Screens/Screen.h" "Screens/Tile/Tile.h" "Screens/Tile/Tile.cpp" "Screens/Aufgabe1b.h" "Screens/Aufgabe1b.cpp" "Screens/Aufgabe1c.h" "Screens/Aufgabe1c.cpp" "Screens/Items/ItemBase.h" "Screens/Items/Cap.h" "Screens/Items/Cap.cpp" "Screens/Inventory/Inventory.h" "Screens/Aufgabe2a.h" "Screens/Aufgabe2a.cpp" "Screens/Items/ItemBase.cpp" "Screens/InventoryScreen.h" "Screens/InventoryScreen.cpp" "Screens/Actor/Char.h" "Screens/Actor/Char.cpp" "Screens/Actor/PlayerChar.h" "Screens/Actor/PlayerChar.cpp"  "Screens/Inventory/InvContainer.h" "Screens/Aufgabe2b.h" "Screens/Aufgabe2b.cpp" "Screens/Items/SoakerGun.h" "Screens/Items/SoakerGun.cpp" "Screens/Items/ArmFloats.h" "Screens/Items/ArmFloats.cpp" "Screens/Items/PoolNoodle.h" "Screens/Items/PoolNoodle.cpp" "Screens/Items/ItemInfo.h" "Screens/Items/ItemInfo.cpp" "Screens/Items/Snorkel.h" "Screens/Items/Snorkel.cpp" "Screens/Items/FloatRing.h" "Screens/Items/FloatRing.cpp" "Screens/Items/Shuriken.h" "Screens/Items/Shuriken.cpp" "Screens/Items/ItemList.h")
 
 # Add config.h.in file
 configure_file(config.h.in config.h)
