@@ -17,9 +17,12 @@ public:
 	T GetEquippedItem(ItemType itemType) const;
 	bool UnequipItem(ItemType itemType);
 	bool TossItem(int slot);
-	void SortItemsAfterName();
-	void SortItemsAfterWeight();
-	void SortItemsAfterValue();
+	void SortByNameLowToHigh();
+	void SortByNameHighToLow();
+	void SortByWeightLowToHigh();
+	void SortByWeightHighToLow();
+	void SortByValueLowToHigh();
+	void SortByValueHighToLow();
 
 protected:
 
@@ -34,6 +37,7 @@ private:
 	T slot3;
 
 	T emptySlot; //set slots to this, if item gets unequipped
+	std::vector<int> emptySlotCounter;
 };
 
 template <typename T, typename S>
@@ -159,13 +163,49 @@ inline bool Inventory<T, S>::TossItem(int slot)
 
 //All Functions below this line were added for 3a) and onwards
 template<typename T, typename S>
-inline void Inventory<T, S>::SortItemsAfterName()
+inline void Inventory<T, S>::SortByNameLowToHigh()
 {
+	T temp;
+	int i;
+	for (int j = 1; j < slots; j++) {
+		temp = inventory->GetItem(j);
+		i = j - 1;
+		while (i >= 0 && inventory->GetItem(i).GetName() < temp.GetName()) {
+			inventory->SetItem(inventory->GetItem(i), i + 1);
+			i = i - 1;
+		}
+		inventory->SetItem(temp, i + 1);
+	}
+	while (inventory->GetItem(0).GetType() == ItemType::Empty) {
+		inventory->PopItem(0);
+	}
+	
 	return;
 }
 
 template<typename T, typename S>
-inline void Inventory<T, S>::SortItemsAfterWeight()
+inline void Inventory<T, S>::SortByNameHighToLow()
+{
+	T temp;
+	int i;
+	for (int j = 1; j < slots; j++) {
+		temp = inventory->GetItem(j);
+		i = j - 1;
+		while (i >= 0 && inventory->GetItem(i).GetName() > temp.GetName()) {
+			inventory->SetItem(inventory->GetItem(i), i + 1);
+			i = i - 1;
+		}
+		inventory->SetItem(temp, i + 1);
+	}
+
+	while (inventory->GetItem(0).GetType() == ItemType::Empty) {
+		inventory->PopItem(0);
+	}
+	return;
+}
+
+template<typename T, typename S>
+inline void Inventory<T, S>::SortByWeightLowToHigh()
 {
 	T temp;
 	int i;
@@ -178,11 +218,36 @@ inline void Inventory<T, S>::SortItemsAfterWeight()
 		}
 		inventory->SetItem(temp, i + 1);
 	}
+
+	while (inventory->GetItem(0).GetType() == ItemType::Empty) {
+		inventory->PopItem(0);
+	}
 	return;
 }
 
 template<typename T, typename S>
-inline void Inventory<T, S>::SortItemsAfterValue()
+inline void Inventory<T, S>::SortByWeightHighToLow()
+{
+	T temp;
+	int i;
+	for (int j = 1; j < slots; j++) {
+		temp = inventory->GetItem(j);
+		i = j - 1;
+		while (i >= 0 && inventory->GetItem(i).GetWeight() < temp.GetWeight()) {
+			inventory->SetItem(inventory->GetItem(i), i + 1);
+			i = i - 1;
+		}
+		inventory->SetItem(temp, i + 1);
+	}
+
+	while (inventory->GetItem(0).GetType() == ItemType::Empty) {
+		inventory->PopItem(0);
+	}
+	return;
+}
+
+template<typename T, typename S>
+inline void Inventory<T, S>::SortByValueLowToHigh()
 {
 	T temp;
 	int i;
@@ -194,6 +259,31 @@ inline void Inventory<T, S>::SortItemsAfterValue()
 			i = i - 1;
 		}
 		inventory->SetItem(temp, i + 1);
+	}
+
+	while (inventory->GetItem(0).GetType() == ItemType::Empty) {
+		inventory->PopItem(0);
+	};
+	return;
+}
+
+template<typename T, typename S>
+inline void Inventory<T, S>::SortByValueHighToLow()
+{
+	T temp;
+	int i;
+	for (int j = 1; j < slots; j++) {
+		temp = inventory->GetItem(j);
+		i = j - 1;
+		while (i >= 0 && inventory->GetItem(i).GetValue() < temp.GetValue()) {
+			inventory->SetItem(inventory->GetItem(i), i + 1);
+			i = i - 1;
+		}
+		inventory->SetItem(temp, i + 1);
+	}
+
+	while (inventory->GetItem(0).GetType() == ItemType::Empty) {
+		inventory->PopItem(0);
 	}
 	return;
 }

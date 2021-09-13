@@ -21,11 +21,11 @@ public:
 	virtual int GetStrengthStat();
 	~ItemBase() = default;
 protected:
-	float weight{100}; //set to high value, so that the sort algorithm places empty slots last
-	std::string name{};
+	float weight{}; //set to high value, so that the sort algorithm places empty slots last
+	std::string name{}; //same as weight
 	std::string description{};
 	std::string description2{};
-	float value{1000}; //same as for weight
+	float value{}; //same as for weight
 	Vector2 spawnVector{};
 	Texture2D texture{};
 	bool isVisible{ true };

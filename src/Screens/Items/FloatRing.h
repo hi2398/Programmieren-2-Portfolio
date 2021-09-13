@@ -4,7 +4,7 @@
 
 class FloatRing : public ItemBase {
 public:
-	explicit FloatRing(Vector2 spawnVector);
+	explicit FloatRing(Vector2 spawnVector = { 0 });
 	void Draw() override;
 	~FloatRing() = default;
 

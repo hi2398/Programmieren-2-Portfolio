@@ -5,7 +5,7 @@
 
 class PlayerChar : public Char {
 public:
-	PlayerChar(Vector2 spawnVec);
+	PlayerChar(Vector2 spawnVec, int inventorySlots = 10);
 	void Update() override;
 	bool HasEmptyInventorySlots();
 	int GetEmptyInventorySlot();
@@ -33,7 +33,6 @@ private:
 	Vector2 startPos{};
 	float carryWeight = 0.0;
 	static constexpr float startingStrengthStat = 5;
-	int inventorySlots = 10;
 
 	//player inventory
 	std::shared_ptr<Inventory<ItemBase>> inventory;

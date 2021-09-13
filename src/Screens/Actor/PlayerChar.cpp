@@ -1,6 +1,6 @@
 #include "PlayerChar.h"
 
-PlayerChar::PlayerChar(Vector2 spawnVec)
+PlayerChar::PlayerChar(Vector2 spawnVec, int inventorySlots)
 {
 	startPos = spawnVec;
 	position = spawnVec;

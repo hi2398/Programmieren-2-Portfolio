@@ -35,20 +35,10 @@ void InventoryScreen::Input(PlayerChar& player)
 
 	TossThisItem(player);
 
-	ShowInfo();
-
-	if (IsKeyPressed(KEY_T)) {
-		player.GetInventory()->SortItemsAfterWeight();
-	}
-	if (IsKeyPressed(KEY_Y)) {
-		player.GetInventory()->SortItemsAfterValue();
-	}
-	if (IsKeyPressed(KEY_U)) {
-		player.GetInventory()->SortItemsAfterName();
-	}
+	ShowInfo(player); //this is just some quality of life stuff
 }
 
-void InventoryScreen::ShowInfo()
+void InventoryScreen::ShowInfo(PlayerChar& player)
 {
 	Rectangle infoRec = { 210, 53, 20, 10};
 	if (CheckCollisionPointRec(virtualMouse, infoRec)) {
@@ -61,6 +51,62 @@ void InventoryScreen::ShowInfo()
 		showCarryInfo = true;
 	}
 	else showCarryInfo = false;
+
+	if (activeScene != SceneName::Aufgabe2a && activeScene != SceneName::Aufgabe2b) {
+		infoRec = { 252, 190, 20, 7};
+		if (CheckCollisionPointRec(virtualMouse, infoRec)) {
+			showNamePlusInfo = true;
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+				player.GetInventory()->SortByNameHighToLow();
+			}
+		}
+		else showNamePlusInfo = false;
+
+		infoRec = { 252, 198, 20, 7 };
+		if (CheckCollisionPointRec(virtualMouse, infoRec)) {
+			showNameMinusInfo = true;
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+				player.GetInventory()->SortByNameLowToHigh();
+			}
+		}
+		else showNameMinusInfo = false;
+
+		infoRec = { 252, 206, 20, 7 };
+		if (CheckCollisionPointRec(virtualMouse, infoRec)) {
+			showWeightPlusInfo = true;
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+				player.GetInventory()->SortByWeightHighToLow();
+			}
+		}
+		else showWeightPlusInfo = false;
+
+		infoRec = { 252, 214, 20, 7 };
+		if (CheckCollisionPointRec(virtualMouse, infoRec)) {
+			showWeightMinusInfo = true;
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+				player.GetInventory()->SortByWeightLowToHigh();
+			}
+		}
+		else showWeightMinusInfo = false;
+
+		infoRec = { 252, 222, 20, 7 };
+		if (CheckCollisionPointRec(virtualMouse, infoRec)) {
+			showValuePlusInfo = true;
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+				player.GetInventory()->SortByValueHighToLow();
+			}
+		}
+		else showValuePlusInfo = false;
+
+		infoRec = { 252, 230, 20, 7 };
+		if (CheckCollisionPointRec(virtualMouse, infoRec)) {
+			showValueMinusInfo = true;
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+				player.GetInventory()->SortByValueLowToHigh();
+			}
+		}
+		else showValueMinusInfo = false;
+	}
 }
 
 void InventoryScreen::TossThisItem(PlayerChar& player)
@@ -228,6 +274,20 @@ void InventoryScreen::Draw()
 	DrawText("Equip/ Unequip", position.x + 30, 10, 5, BLACK);
 	DrawText("Toss", position.x + 155, 10, 5, BLACK);
 
+	//draw inventory items
+	int y = 0;
+	int x = 0;
+	for (int i = 0; i < slots; i++) {
+		if (i % 5 == 0 && i != 0) y++, x = 0;
+		DrawTexture(invCont[i].GetTexture(), 61 + 40 * x, 161 + 32 * y, WHITE);
+		x++;
+	}
+
+	//draw equipped items
+	DrawTexture(equippedHeadGear.GetTexture(), 180, 53, WHITE);
+	DrawTexture(equippedBodyGear.GetTexture(), 180, 87, WHITE);
+	DrawTexture(equippedWeapon.GetTexture(), 180, 121, WHITE);
+
 	//draw character stats
 	if (activeScene != SceneName::Aufgabe2a) {
 		DrawText(TextFormat("S: %i", playerStrength), 210, 53, 5, BLACK);
@@ -246,20 +306,47 @@ void InventoryScreen::Draw()
 		DrawText("is too high, you can't move.", virtualMouse.x - 145, virtualMouse.y + 11, 5, BLACK);
 	}
 
-
-	//draw inventory items
-	int y = 0;
-	int x = 0;
-	for (int i = 0; i < slots; i++) {
-		if (i % 5 == 0 && i!= 0) y++, x = 0;
-		DrawTexture(invCont[i].GetTexture(), 61 + 40 * x, 161 + 32 * y, WHITE);
-		x++;
+	if (activeScene != SceneName::Aufgabe2a && activeScene != SceneName::Aufgabe2b) {
+		DrawText("SORT", 250, 177, 5, BLACK);
+		DrawText("N +", 252, 190, 5, BLACK);
+		DrawText("N -", 252, 198, 5, BLACK);
+		DrawText("W +", 252, 206, 5, BLACK);
+		DrawText("W -", 252, 214, 5, BLACK);
+		DrawText("V +", 252, 222, 5, BLACK);
+		DrawText("V -", 252, 230, 5, BLACK);
+	}
+	if (showNamePlusInfo) {
+		DrawRectangle(virtualMouse.x - 150, virtualMouse.y, 150, 12, WHITE);
+		DrawRectangleLines(virtualMouse.x - 150, virtualMouse.y, 150, 12, BLACK);
+		DrawText("Sort by Name A-Z", virtualMouse.x - 145, virtualMouse.y + 1, 5, BLACK);
+	}
+	else if (showNameMinusInfo) {
+		DrawRectangle(virtualMouse.x - 150, virtualMouse.y, 150, 12, WHITE);
+		DrawRectangleLines(virtualMouse.x - 150, virtualMouse.y, 150, 12, BLACK);
+		DrawText("Sort by Name Z-A", virtualMouse.x - 145, virtualMouse.y + 1, 5, BLACK);
+	}
+	else if (showWeightPlusInfo) {
+		DrawRectangle(virtualMouse.x - 150, virtualMouse.y, 150, 12, WHITE);
+		DrawRectangleLines(virtualMouse.x - 150, virtualMouse.y, 150, 12, BLACK);
+		DrawText("Sort by Weight High-Low", virtualMouse.x - 145, virtualMouse.y + 1, 5, BLACK);
+	}
+	else if (showWeightMinusInfo) {
+		DrawRectangle(virtualMouse.x - 150, virtualMouse.y, 150, 12, WHITE);
+		DrawRectangleLines(virtualMouse.x - 150, virtualMouse.y, 150, 12, BLACK);
+		DrawText("Sort by Weight Low-High", virtualMouse.x - 145, virtualMouse.y + 1, 5, BLACK);
+	}
+	else if (showValuePlusInfo) {
+		DrawRectangle(virtualMouse.x - 150, virtualMouse.y, 150, 12, WHITE);
+		DrawRectangleLines(virtualMouse.x - 150, virtualMouse.y, 150, 12, BLACK);
+		DrawText("Sort by Value High-Low", virtualMouse.x - 145, virtualMouse.y + 1, 5, BLACK);
+	}
+	else if (showValueMinusInfo) {
+		DrawRectangle(virtualMouse.x - 150, virtualMouse.y, 150, 12, WHITE);
+		DrawRectangleLines(virtualMouse.x - 150, virtualMouse.y, 150, 12, BLACK);
+		DrawText("Sort by Value Low-High", virtualMouse.x - 145, virtualMouse.y + 1, 5, BLACK);
 	}
 
-	//draw equipped items
-	DrawTexture(equippedHeadGear.GetTexture(), 180, 53, WHITE);
-	DrawTexture(equippedBodyGear.GetTexture(), 180, 87, WHITE);
-	DrawTexture(equippedWeapon.GetTexture(), 180, 121, WHITE);
+	
 
 	if (showInfo) {
 		itemInfo->Draw();

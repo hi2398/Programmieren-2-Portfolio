@@ -4,7 +4,7 @@
 
 class Cap : public ItemBase {
 public:
-	explicit Cap(Vector2 spawnVector);
+	explicit Cap(Vector2 spawnVector = { 0 });
 	void Draw() override;
 	~Cap() = default;
 

@@ -4,7 +4,7 @@
 
 class Shuriken : public ItemBase {
 public:
-	explicit Shuriken(Vector2 spawnVector);
+	explicit Shuriken(Vector2 spawnVector = { 0 });
 	void Draw() override;
 	~Shuriken() = default;
 

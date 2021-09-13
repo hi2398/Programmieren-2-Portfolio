@@ -12,7 +12,7 @@ public:
 	InventoryScreen(SceneName sceneName, PlayerChar& player); //aufgabe2b and onwards
 	InventoryScreen(SceneName sceneName);// aufgabe 2a
 	void Input(PlayerChar& player);
-	void ShowInfo();
+	void ShowInfo(PlayerChar& player);
 	void TossThisItem(PlayerChar& player);
 	void UnequipThisItem(PlayerChar& player);
 	void EquipItem(PlayerChar& player);
@@ -41,7 +41,12 @@ private:
 	ItemBase			equippedWeapon;
 	bool				showStrengthInfo{ false };
 	bool				showCarryInfo{ false };
-
+	bool				showNamePlusInfo{ false };
+	bool				showNameMinusInfo{ false };
+	bool				showWeightPlusInfo{ false };
+	bool				showWeightMinusInfo{ false };
+	bool				showValuePlusInfo{ false };
+	bool				showValueMinusInfo{ false };
 	
 	std::vector<ItemBase> invCont;
 	std::unique_ptr<ItemInfo> itemInfo;

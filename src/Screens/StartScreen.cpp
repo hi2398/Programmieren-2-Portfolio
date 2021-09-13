@@ -4,6 +4,8 @@
 #include "Aufgabe1c.h"
 #include "Aufgabe2a.h"
 #include "Aufgabe2b.h"
+#include "Aufgabe3a.h"
+#include "Aufgabe3b.h"
 #include "raylib.h"
 #include "../global.h"
 
@@ -19,8 +21,8 @@ void StartScreen::Input()
 	if (CheckCollisionPointRec(virtualMouse, select1c) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) nextScreen = std::make_shared<Aufgabe1c>();
 	if (CheckCollisionPointRec(virtualMouse, select2a) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) nextScreen = std::make_shared<Aufgabe2a>();
 	if (CheckCollisionPointRec(virtualMouse, select2b) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) nextScreen = std::make_shared<Aufgabe2b>();
-	if (CheckCollisionPointRec(virtualMouse, select3a) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT));
-	if (CheckCollisionPointRec(virtualMouse, select3b) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT));
+	if (CheckCollisionPointRec(virtualMouse, select3a) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) nextScreen = std::make_shared<Aufgabe3a>();
+	if (CheckCollisionPointRec(virtualMouse, select3b) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) nextScreen = std::make_shared<Aufgabe3b>();
 	if (CheckCollisionPointRec(virtualMouse, select4a) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT));
 	if (CheckCollisionPointRec(virtualMouse, select5a) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT));
 }
