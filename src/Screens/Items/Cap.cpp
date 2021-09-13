@@ -3,6 +3,7 @@
 Cap::Cap(Vector2 spawnVector) : ItemBase(ItemType::HeadGear)
 {
 	weight = 1.0;
+	strengthValue = 1;
 	name = "Heroic Cap";
 	description = "You can wear it to protect your head.";
 	description2 = "It makes you feel heroic!";

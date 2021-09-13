@@ -3,6 +3,7 @@
 PoolNoodle::PoolNoodle(Vector2 spawnVector) : ItemBase(ItemType::Weapon)
 {
 	weight = 5.0;
+	strengthValue = 2;
 	name = "ExcaliNoodle";
 	description = "This pool noodle once belonged to ";
 	description2 = "a long forgotten king...";

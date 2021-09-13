@@ -3,6 +3,7 @@
 ArmFloats::ArmFloats(Vector2 spawnVector) : ItemBase(ItemType::BodyGear)
 {
 	weight = 1.0;
+	strengthValue = 1;
 	name = "Paladin's Arm Floats";
 	description = "Even the mightiest knights would kill";
 	description2 = "to wear these.";

@@ -3,6 +3,7 @@
 SoakerGun::SoakerGun(Vector2 spawnVector) : ItemBase(ItemType::Weapon)
 {
 	weight = 5.0;
+	strengthValue = 2;
 	name = "Holy Soaker Gun";
 	description = "It looks like a normal squirt gun,";
 	description2 = "but it is loaded with holy water.";

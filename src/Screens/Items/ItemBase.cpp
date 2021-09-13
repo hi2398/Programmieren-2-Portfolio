@@ -54,3 +54,8 @@ void ItemBase::SetIsVisible(bool visible)
 {
 	this->isVisible = visible;
 }
+
+int ItemBase::GetStrengthStat()
+{
+	return strengthValue;
+}

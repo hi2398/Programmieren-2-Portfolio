@@ -7,7 +7,7 @@ public:
 	ItemInfo(ItemBase& item);
 	~ItemInfo() {};
 
-	void Update(ItemBase& item);
+	void Update(ItemBase& item, Vector2 drawPos);
 	void Draw();
 private:
 	Texture2D texture{};
@@ -21,6 +21,7 @@ private:
 	std::string sName;
 	std::string sDescription;
 	std::string sDescription2;
+	int strengthPlus;
 
 	float value;
 	float weight;

@@ -179,8 +179,6 @@ void Aufgabe2b::Update()
 		}
 		activeFrame = { 0, (float)thisFrame * 16, 16, 16 };
 
-		player->Update();
-
 		for (int i = 0; i < item.size(); i++) {
 			if (item[i]->GetPosition().x == player->GetPosition().x && item[i]->GetPosition().y == player->GetPosition().y && item[i]->IsVisible()) {
 				player->GetInventory()->SetItem(*item[i], GetFreeInventorySlot());
@@ -191,7 +189,7 @@ void Aufgabe2b::Update()
 	else {
 		invInterface->Update(*player);
 	}
-
+	player->Update();
 
 }
 
@@ -215,7 +213,6 @@ void Aufgabe2b::Draw()
 	for (auto& row : map) {
 
 		for (auto& column : row) { // for each element in each row
-
 
 			switch (column.type)
 			{

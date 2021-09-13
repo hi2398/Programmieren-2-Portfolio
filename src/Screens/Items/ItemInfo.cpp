@@ -8,23 +8,21 @@ ItemInfo::ItemInfo(ItemBase& item)
 	texture = LoadTexture("assets/iteminfo.png");
 }
 
-void ItemInfo::Update(ItemBase& item)
+void ItemInfo::Update(ItemBase& item, Vector2 drawPos)
 {
-	auto pItem = item; //keep the item reference alive
+	sName = item.GetName(); //get item name as string
 
-	sName = pItem.GetName(); //get item name as string
-	name = sName.c_str(); //convert string to const char
+	strengthPlus = item.GetStrengthStat();
 
-	sDescription = pItem.GetDescription(); //same procedure as for name
-	description = sDescription.c_str();
+	sDescription = item.GetDescription(); //same procedure as for name
 
-	sDescription2 = pItem.GetDescription2();
-	description2 = sDescription2.c_str();
+	sDescription2 = item.GetDescription2();
 
-	value = pItem.GetValue();
-	weight = pItem.GetWeight();
 
-	switch (pItem.GetType())
+	value = item.GetValue();
+	weight = item.GetWeight();
+
+	switch (item.GetType())
 	{
 	case ItemType::BodyGear:
 		type = "Body Gear";
@@ -40,17 +38,18 @@ void ItemInfo::Update(ItemBase& item)
 	}
 
 	itemTex = item.GetTexture();
-	this->position = { 50,55 };
+	this->position = drawPos;
 }
 
 void ItemInfo::Draw()
 {
-	DrawTexture(texture, position.x, position.y, WHITE);
+	DrawTexturePro(texture, { 0,0,(float)texture.width, (float)texture.height }, { position.x, position.y, 250, 115 }, {0}, 0.0, WHITE);
 	DrawTexture(itemTex, position.x + 10, position.y + 20, WHITE);
-	DrawText(name, position.x + 10, position.y + 5, 5,BLACK);
+	DrawText(sName.c_str(), position.x + 10, position.y + 5, 5,BLACK);
 	DrawText(type, position.x + 160, position.y + 5, 5, BLACK);
-	DrawText(description, position.x + 10, position.y + 40, 5, BLACK);
-	DrawText(description2, position.x + 10, position.y + 50, 5, BLACK);
-	DrawText(TextFormat("Value: %.2f $", value), position.x + 10, position.y + 60, 5, BLACK);
-	DrawText(TextFormat("Weight: %.2f", weight), position.x + 100, position.y + 60, 5, BLACK);
+	DrawText(sDescription.c_str(), position.x + 10, position.y + 40, 5, BLACK);
+	DrawText(sDescription2.c_str(), position.x + 10, position.y + 50, 5, BLACK);
+	DrawText(TextFormat("Value: %.2f $", value), position.x + 10, position.y + 70, 5, BLACK);
+	DrawText(TextFormat("Weight: %.2f", weight), position.x + 100, position.y + 70, 5, BLACK);
+	DrawText(TextFormat("Strength+: %i", strengthPlus), position.x + 10, position.y + 90, 5, BLACK);
 }

@@ -3,6 +3,7 @@
 Snorkel::Snorkel(Vector2 spawnVector) : ItemBase(ItemType::HeadGear)
 {
 	weight = 3.0;
+	strengthValue = 0;
 	name = "Mysterious Snorkel";
 	description = "Great armor, but uncomfortable";
 	description2 = "and makes breathing hard";

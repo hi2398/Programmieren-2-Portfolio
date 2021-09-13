@@ -3,6 +3,7 @@
 Shuriken::Shuriken(Vector2 spawnVector) : ItemBase(ItemType::Weapon)
 {
 	weight = 3.0;
+	strengthValue = 3;
 	name = "Starfish Shuriken";
 	description = "You sense immense bloodlust";
 	description2 = "coming from this.";
